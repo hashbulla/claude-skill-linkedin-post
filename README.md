@@ -2,7 +2,10 @@
 
 **Turn curated Karakeep bookmarks into high-performing French LinkedIn posts — fully automated pipeline with human checkpoints.**
 
-`MIT License` · `Claude Code Skill` · `French / Français`
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-skill-blueviolet.svg)](https://claude.ai/claude-code)
+![Language: French](https://img.shields.io/badge/language-French-brightgreen.svg)
+[![Dependency: humanize-fr](https://img.shields.io/badge/requires-humanize--fr-orange.svg)](https://github.com/hashbulla/claude-skill-humanize-fr)
 
 ---
 
@@ -61,6 +64,53 @@ echo "KARAKEEP_API_KEY=your_key_here" >> .env
 | `/linkedin-post` | Full pipeline — ingest, plan, generate, humanize, finalize |
 | `/linkedin-post --dry-run` | Preview manifest and plan only — zero writes, zero mutations |
 | `/linkedin-post --tag kubernetes` | Filter to bookmarks with an additional tag |
+
+## Example Output
+
+After running `/linkedin-post`, you get copy-paste-ready posts:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+POST 1 — PASTOR | AI | 2026-04-01 08:30 CET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+J'ai automatisé 80% de ma veille tech.
+Ça m'a pris 3 weekends. Et j'ai failli tout abandonner au 2ème.
+
+Le problème, en fait, c'était pas l'outil.
+C'était ma façon de trier l'information.
+
+On scrolle, on bookmarke, on oublie.
+J'avais 200+ signets non lus en janvier.
+
+Alors j'ai construit un pipeline :
+→ Karakeep pour capturer
+→ Un tri par thème automatique
+→ Et une synthèse hebdo en 3 posts
+
+Résultat ? 4h de veille → 45 minutes.
+Pas en sacrifiant la qualité — en supprimant le bruit.
+
+Mais est-ce que le vrai gain, c'est le temps ?
+Ou c'est la clarté de savoir exactement quoi partager ?
+
+Si ta veille ressemble à un cimetière de bookmarks,
+dis-moi en commentaire : c'est quoi ton plus gros frein ?
+
+#IA #VeilleTech #Productivité #ContentStrategy
+
+---
+[PREMIER COMMENTAIRE]
+🔗 Sources et ressources :
+- How I Built My AI Reading Pipeline : https://example.com/article1
+- Karakeep Documentation : https://docs.karakeep.app
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Draft saved to:
+```
+→ posts/drafts/2026-04-01-veille-tech-pipeline.md
+```
 
 ## Pipeline Phases
 
@@ -137,10 +187,18 @@ All tag and list IDs are resolved by name at runtime — never hardcoded.
 | `Tavily MCP non disponible` | Non-blocking — pipeline uses Karakeep's crawled content instead |
 | `Aucun bookmark avec le tag 'to-process'` | Tag at least one bookmark with `to-process` in Karakeep |
 | Partial Karakeep mutation failures | Re-run pipeline — mutations are idempotent |
+| Content budget exceeded (60K chars) | Pipeline caps extraction at 60K characters total. Remaining bookmarks are skipped. Run again with `--tag` to target a smaller subset |
 
 ## Contributing
 
-PRs welcome. Open an issue first for major changes.
+Contributions are welcome — especially new copywriting frameworks, hook patterns, and Karakeep API edge cases.
+
+1. Open an issue describing the change you'd like to make
+2. Fork the repo and create a feature branch
+3. Update SKILL.md with your changes
+4. Submit a PR with a clear description of what changed and why
+
+For framework additions: include the framework name, when to use it, its structure, and a sample post outline.
 
 ## License
 
